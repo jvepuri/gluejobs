@@ -1,0 +1,40 @@
+{
+  "name" : "customerscodecommitjob",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::959786390462:role/dojo-crawler-rds-lf-role",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-959786390462-us-east-1/scripts/customerscodecommitjob.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-959786390462-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-959786390462-us-east-1/temporary/"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 480,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1764724769916\":{\"CatalogSource\":{\"Database\":\"dojodb\",\"Name\":\"AWS Glue Data Catalog\",\"PartitionPredicate\":\"\",\"Table\":\"customers\"}},\"node-1764724774932\":{\"S3DirectTarget\":{\"AutoDataQuality\":{\"EvaluationContext\":\"EvaluateDataQuality_node1764724765860\",\"IsEnabled\":true},\"Compression\":\"snappy\",\"Format\":\"csv\",\"Inputs\":[\"node-1764724769916\"],\"Name\":\"Amazon S3\",\"NumberTargetPartitions\":\"0\",\"PartitionKeys\":[],\"Path\":\"s3://dojo-aws-vepuri/terra-lake-db/output/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "gluejobs",
+    "branch" : "main",
+    "folder" : "awsglue"
+  }
+}
